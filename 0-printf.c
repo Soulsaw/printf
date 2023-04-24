@@ -39,6 +39,11 @@ int _printf(const char *format, ...)
 			_putchar('%');
 			i++;
 		}
+		else if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
+		{
+			print_int(va_arg(ap, int));
+			i++;
+		}
 		else
 		{
 			_putchar(format[i]);
