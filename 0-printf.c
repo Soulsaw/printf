@@ -31,12 +31,12 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			_putchar(va_arg(ap, int));
+			putchar(va_arg(ap, int));
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
-			_putchar('%');
+			putchar('%');
 			i++;
 		}
 		else if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
@@ -46,7 +46,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			_putchar(format[i]);
+			putchar(format[i]);
 		}
 	}
 	va_end(ap);
