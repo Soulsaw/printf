@@ -1,6 +1,37 @@
 #include "main.h"
 
 /**
+ * print_conversion - function that execute
+ * @choice: The character
+ * @a: the incremente numnber
+ * @ap: The variadic function
+ */
+void print_conversion(char choice, int a, va_list ap)
+{
+	char c;
+
+	switch (choice)
+	{
+		case 'c':
+			c = (char) va_arg(ap, int);
+			write(1, &c, 1);
+			a++;
+			break;
+		case 's':
+			print_string(va_arg(ap, char*));
+			a++;
+			break;
+		case '%':
+			c = '%';
+			write(1, &c, 1);
+			a++;
+			break;
+		default:
+			break;
+	}
+}
+
+/**
  * _printf - This function produces output according to the format
  * @format: This is the string we want to prints
  * Return: The number of character printed
@@ -24,29 +55,13 @@ int _printf(const char *format, ...)
 
 	for (i = 0; i < len; i++)
 	{
-		if (format[i] == '%' && format[i + 1] == 's')
+		if (format[i] == '%')
 		{
-			print_string(va_arg(ap, char*));
-			i++;
-		}
-		else if (format[i] == '%' && format[i + 1] == 'c')
-		{
-			putchar(va_arg(ap, int));
-			i++;
-		}
-		else if (format[i] == '%' && format[i + 1] == '%')
-		{
-			putchar('%');
-			i++;
-		}
-		else if (format[i] == '%' && (format[i + 1] == 'd' || format[i + 1] == 'i'))
-		{
-			print_int(va_arg(ap, int));
-			i++;
+			print_conversion(format[i + 1], i, ap);
 		}
 		else
 		{
-			putchar(format[i]);
+			write(1, &(format[i]), 1);
 		}
 	}
 	va_end(ap);
