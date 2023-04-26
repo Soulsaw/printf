@@ -5,34 +5,41 @@
  * @choice: The character
  * @a: the incremente numnber
  * @ap: The variadic function
+ * @b: The boolean
+ * @len: The lenght of the string format
  */
-void print_conversion(char choice, int a, va_list ap)
+void print_conversion(char choice, int *a, va_list ap, int *b, int *len)
 {
-	char c;
+	char c, *str;
 
 	switch (choice)
 	{
 		case 'c':
 			c = (char) va_arg(ap, int);
+			*len += 1;
 			write(1, &c, 1);
-			a++;
+			*a += 1;
+			*b = 1;
 			break;
 		case 's':
-			print_string(va_arg(ap, char*));
-			a++;
+			str = va_arg(ap, char*);
+			if (str == NULL)
+			{
+				str = "(null)";
+			}
+			print_string(str, len);
+			*a += 1;
+			*b = 1;
 			break;
 		case '%':
 			c = '%';
+			*len += 1;
 			write(1, &c, 1);
-			a++;
+			*a += 1;
+			*b = 1;
+			c = '\0';
 			break;
-		case 'i':
-			print_int(va_arg(ap, int));
-			a++;
-			break;
-		case 'd':
-			print_int(va_arg(ap, int));
-			a++;
+		default:
 			break;
 	}
 }
@@ -46,49 +53,34 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int len = 0, i, b = 0;
-	char *str = "cdis%";
 
 	if (format == NULL)
 	{
-		return (0);
+		return (-1);
 	}
 	va_start(ap, format);
 	i = 0;
 	while (format[i] != '\0')
 	{
 		len++;
-		i++;
-	}
-
-	for (i = 0; i < len; i++)
-	{
 		if (format[i] == '%')
 		{
-			while (*str != '\0')
+			print_conversion(format[i + 1], &i, ap, &b, &len);
+			if (b == 0)
 			{
-				if (*str == format[i + 1])
-				{
-					b = 1;
-				}
-				str++;
-			}
-			if (b == 1)
-			{
-				print_conversion(format[i + 1], i, ap);
+				return (-1);
 			}
 			else
 			{
-				write(1, &(format[i]), 1);
+				len--;
 			}
-
-
 		}
 		else
 		{
 			write(1, &(format[i]), 1);
 		}
+		i++;
 	}
 	va_end(ap);
-
 	return (len);
 }
