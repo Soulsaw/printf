@@ -62,21 +62,18 @@ int _printf(const char *format, ...)
 	i = 0;
 	while (format[i] != '\0')
 	{
-		len++;
 		if (format[i] == '%')
 		{
 			print_conversion(format[i + 1], &i, ap, &b, &len);
-			if (b == 0)
+			if (b == 0 && format[i + 1] != '\0')
 			{
-				return (-1);
-			}
-			else
-			{
-				len--;
+				len++;
+				write(1, &(format[i]), 1);
 			}
 		}
 		else
 		{
+			len++;
 			write(1, &(format[i]), 1);
 		}
 		i++;
