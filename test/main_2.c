@@ -12,8 +12,8 @@ int main(void)
 {
 	int len, len2;
 
-	len = _printf("%d\n", -2147483648);
-	len2 = printf("%d + %d = %d\n", INT_MIN, INT_MAX, (INT_MIN + INT_MAX));
+	len = _printf("%b", UINT_MAX);
+	len2 = printf("11111111111111111111111111111111");
 	fflush(stdout);
 	if (len != len2)
 	{
