@@ -64,7 +64,14 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			print_conversion(format[i + 1], &i, ap, &b, &len);
+			if (format[i + 1] != '\0')
+			{
+				print_conversion(format[i + 1], &i, ap, &b, &len);
+			}
+			else
+			{
+				len--;
+			}
 			if (b == 0 && format[i + 1] != '\0')
 			{
 				len++;
