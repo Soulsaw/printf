@@ -6,5 +6,5 @@
 int _printf(const char *format, ...);
 int _putchar(char c);
 void print_string(char *str, int *len);
-void print_int(int n, int *len);
+void print_int(long int n, int *len);
 #endif /* MAIN_H */

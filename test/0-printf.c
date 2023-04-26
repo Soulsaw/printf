@@ -10,7 +10,7 @@
  */
 void print_conversion_int(char choice, int *a, va_list ap, int *b, int *len)
 {
-	int n;
+	long int n;
 
 	switch (choice)
 	{

@@ -6,9 +6,9 @@
  * @len: Is the lenght of integer
  * Return: nothing
  */
-void print_int(int n, int *len)
+void print_int(long int n, int *len)
 {
-	int abs = n;
+	long int abs = n;
 	char c;
 
 	if (abs < 0)
