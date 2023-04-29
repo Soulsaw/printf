@@ -25,12 +25,6 @@ void print_conversion_int(char choice, int *a, va_list ap, int *b, int *len)
 			*a += 1;
 			*b = 1;
 			break;
-		case 'u':
-			n = va_arg(ap, long int);
-			print_decimal(n, len);
-			*a += 1;
-			*b = 1;
-			break;
 		default:
 			break;
 	}
