@@ -11,9 +11,12 @@
 int main(void)
 {
 	int len, len2;
+	unsigned int l = UINT_MAX;
 
-	len = _printf("%lu", 1024UL);
-	len2 = printf("%lu", 1024UL);
+	l += 1024;
+	len = _printf("%b", l);
+	len2 = printf("1111111111");
+
 	fflush(stdout);
 	if (len != len2)
 	{
