@@ -30,6 +30,16 @@ void print_conversion(char choice, int *a, va_list ap, int *b, int *len)
 			*a += 1;
 			*b = 1;
 			break;
+		case 'p':
+			str = va_arg(ap, char*);
+			if (str == NULL)
+			{
+				str = "(nil)";
+			}
+			print_string(str, len);
+			*a += 1;
+			*b = 1;
+			break;
 		case '%':
 			c = '%';
 			*len += 1;
