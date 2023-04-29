@@ -1,4 +1,21 @@
 #include "main.h"
+/**
+ * execute - description
+ * @format: The charactere
+ * @i: The idice
+ * @ap: The va_list
+ * @b: The boolean
+ * @len: The lenght of _printf
+ * Return: nothing
+ */
+void execute(char format, int *i, va_list ap, int *b, int *len)
+{
+	print_conversion(format, i, ap, b, len);
+	print_conversion_int(format, i, ap, b, len);
+	print_conversion_binary(format, i, ap, b, len);
+	print_conversion_hexdecimal(format, i, ap, b, len);
+	print_conversion_octal(format, i, ap, b, len);
+}
 
 /**
  * _printf - This function produces output according to the format
@@ -8,25 +25,23 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int len = 0, i, b = 0;
+	int len = 0, i = 0, b = 0;
 
 	if (format == NULL)
-	{
 		return (-1);
-	}
 	va_start(ap, format);
-	i = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] != '\0')
+			if ((format[i + 1] == 'l' && format[i + 2] != '\0') ||
+					format[i + 1] != '\0')
 			{
-				print_conversion(format[i + 1], &i, ap, &b, &len);
-				print_conversion_int(format[i + 1], &i, ap, &b, &len);
-				print_conversion_binary(format[i + 1], &i, ap, &b, &len);
-				print_conversion_hexdecimal(format[i + 1], &i, ap, &b, &len);
-				print_conversion_octal(format[i + 1], &i, ap, &b, &len);
+				if (format[i + 1] == 'l')
+				{
+					i++;
+				}
+				execute(format[i + 1], &i, ap, &b, &len);
 			}
 			else
 			{
