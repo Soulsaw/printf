@@ -14,13 +14,13 @@ void print_conversion_int(char choice, int *a, va_list ap, int *b, int *len)
 	switch (choice)
 	{
 		case 'd':
-			n = va_arg(ap, long int);
+			n = va_arg(ap, int);
 			print_int(n, len);
 			*a += 1;
 			*b = 1;
 			break;
 		case 'i':
-			n = va_arg(ap, long int);
+			n = va_arg(ap, int);
 			print_int(n, len);
 			*a += 1;
 			*b = 1;
