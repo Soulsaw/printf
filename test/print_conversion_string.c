@@ -36,7 +36,6 @@ void print_conversion(char choice, int *a, va_list ap, int *b, int *len)
 			write(1, &c, 1);
 			*a += 1;
 			*b = 1;
-			c = '\0';
 			break;
 		default:
 			break;

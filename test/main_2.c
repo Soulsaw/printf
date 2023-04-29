@@ -11,9 +11,10 @@
 int main(void)
 {
 	int len, len2;
+	void *p = (void *)0x7fff5100b608;
 
-	len = _printf("%u", -1024);
-	len2 = printf("%u", -1024);
+	len = _printf("%p", p);
+	len2 = printf("%p", p);
 	fflush(stdout);
 	if (len != len2)
 	{
