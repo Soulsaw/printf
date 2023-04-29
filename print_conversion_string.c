@@ -24,7 +24,7 @@ void print_conversion(char choice, int *a, va_list ap, int *b, int *len)
 			str = va_arg(ap, char*);
 			if (str == NULL)
 			{
-				str = "(nil)";
+				str = "(null)";
 			}
 			print_string(str, len);
 			*a += 1;
