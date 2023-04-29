@@ -26,6 +26,12 @@ void print_conversion_hexdecimal(char choice, int *a,
 			*a += 1;
 			*b = 1;
 			break;
+		case 'p':
+			n = va_arg(ap, long int);
+			print_hexdecimal(n, len, 'x');
+			*a += 1;
+			*b = 1;
+			break;
 		default:
 			break;
 	}
